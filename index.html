@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">📚 Favourite Books</a>
+            <button type="button" class="btn btn-primary position-relative">
+                <i class="bi bi-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    3
+                </span>
+            </button>
+            <!-- <a class="cart">
+                <span class="navbar-toggler-icon"></span>
+            </a> -->
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Next Favorite Book</h1>
+            <p>Browse thousands of titles from all genres</p>
+            <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+    </section>
+
+
+    
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Featured Books</h2>
+
+        <div class="row g-4">
+            
+            <!-- Book 1 -->
+            <div class="col-md-3">
+                <div class="card book-card">
+                    <img src="https://via.placeholder.com/200x300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">The Great Novel</h5>
+                        <p class="card-text">$19.99</p>
+                        <button class="btn btn-success w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="col-md-3">
+                <div class="card book-card">
+                    <img src="https://via.placeholder.com/200x300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Mystery Tales</h5>
+                        <p class="card-text">$14.99</p>
+                        <button class="btn btn-success w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="col-md-3">
+                <div class="card book-card">
+                    <img src="https://via.placeholder.com/200x300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Science World</h5>
+                        <p class="card-text">$24.99</p>
+                        <button class="btn btn-success w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="col-md-3">
+                <div class="card book-card">
+                    <img src="https://via.placeholder.com/200x300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">History Insights</h5>
+                        <p class="card-text">$18.99</p>
+                        <button class="btn btn-success w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 BookStore | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
