@@ -8,6 +8,8 @@ import CheckoutPage from '../components/Checkout.vue'
 import CheckoutSuccessPage from '../components/CheckoutSuccess.vue'
 import AccountPage from '../components/Account.vue'
 import OrderManagementPage from '../components/OrderManagement.vue'
+import LoginPage from '../components/Login.vue'
+import RegisterPage from '../components/Register.vue'
 
 const routes = [
   { path: '/', component: HomePage },
@@ -18,6 +20,8 @@ const routes = [
   { path: '/checkout/success', component: CheckoutSuccessPage },
   { path: '/account', component: AccountPage },
   { path: '/staff/orders', component: OrderManagementPage },
+  { path: '/login', component: LoginPage },
+  { path: '/register', component: RegisterPage },
 ]
 
 const router = createRouter({
