@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(books => {
             const bestsellers = books.filter(book => book.badge === "bestseller");
             const preorders = books.filter(book => book.badge === "preorder");
-            const featuredAuthorBooks = books.filter(book => book.author === "Patrick Rothfuss");
+            const featuredAuthorBooks = books.filter(book => book.author === "Suzanne Collins");
 
             renderBooks(bestsellers, "bestsellers-row");
             renderBooks(preorders, "preorders-row");
