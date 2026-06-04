@@ -1,13 +1,4 @@
-import { Order } from './order.js';
-
-// Enumerator of order status options
-const OrderStatusOpts = Object.freeze({
-    PURCHASED: 0,
-    READY_FOR_DELIVERY: 1,
-    DELIVERING: 2,
-    REFUND_REQUESTED: 3,
-    REFUNDED: 4
-});
+import { Order, OrderStatusOpts } from './order.js';
 
 class OrderController {
     constructor() {

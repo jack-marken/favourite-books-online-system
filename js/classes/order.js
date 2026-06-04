@@ -1,3 +1,12 @@
+// Enumerator of order status options
+const OrderStatusOpts = Object.freeze({
+    0: "Purchased",
+    1: "Ready for Delivery",
+    2: "Delivering",
+    3: "Refund Requested",
+    4: "Refunded"
+});
+
 class Order {
     constructor(data) {
         this.id = data.id;
@@ -13,11 +22,10 @@ class Order {
         id: ${this.id}
         books: ${JSON.stringify(this.books)}
         total cost: ${this.totalCost}
-        status: ${this.status}
-        ===`;
+        status: ${OrderStatusOpts[this.status]}`;
 
         return outputString;
     }
 }
 
-export { Order };
+export { OrderStatusOpts, Order };
