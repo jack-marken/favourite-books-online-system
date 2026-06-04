@@ -1,4 +1,4 @@
-// import { Order } from "./order.js"
+import { Book } from "./book.js"
 
 class BookController {
     constructor() {
@@ -20,10 +20,10 @@ class BookController {
             const response = await fetch(dbPath);
             const data = await response.json();
             const book = data.values().find(b => b.id == id)
-            this.book = book;
-            console.log(`Book loaded`);
+            this.book = new Book(book);
+            return this.book;
         } catch (error) {
-            console.error("Error loading order details:", error)
+            console.error("Error loading book details:", error)
         }
     }
 
