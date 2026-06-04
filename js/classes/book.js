@@ -15,13 +15,19 @@ class Book {
 
     toString() {
         const outputString = `===
-        Order
+        Book
         ---
         id: ${this.id}
-        books: ${JSON.stringify(this.books)}
-        total cost: ${this.totalCost}
-        status: ${this.status}
-        ===`;
+        title: ${this.title}
+        author: ${this.author}
+        price: ${this.price}
+        originalPrice: ${this.originalPrice}
+        cover: ${this.cover}
+        genre: ${this.genre}
+        descriptino: ${this.genre}
+        description: ${this.description}
+        badge: ${this.badge}
+        stock: ${this.stock}`;
 
         return outputString;
     }
