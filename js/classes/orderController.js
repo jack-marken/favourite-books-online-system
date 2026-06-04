@@ -6,15 +6,20 @@ class OrderController {
         this.order = null;
     }
 
-    newOrder() {
+    newOrder(data) {
         console.log("TESTING");
+        // newOrderData = {
+        //     this.id = data.id;
+        //     this.books = data.books
+        //     this.totalCost = data.totalCost;
+        //     this.status = data.status;
+        // }
     }
 
     /**
     * Instantiates an Order object and loads it into `this.order`
-    * @param {number} orderNum - the unique identifier
-    * @param {number} newValues - Values to update; takes a JSON Object; { status: 'delivering' }
-    * @returns {Order} The formatted total.
+    * @param {number} id - the unique identifier to find the order in the database
+    * @returns {Order} - a generated Order object stored in this.order
     */
     async loadOrder(id) {
         const dbPath = window.location.origin + "/data/orders.json";
@@ -23,15 +28,23 @@ class OrderController {
             const data = await response.json();
             const order = data.values().find(o => o.id == id)
             this.order = new Order(order);
+            console.log(this.order)
             return this.order;
         } catch (error) {
             console.error("Error loading order details:", error)
         }
     }
 
-    updateOrder(id) {
-        order = this.loadOrder(orderNum);
-    }
+    // /**
+    // * Loads Order object into `this.order` and updates its values
+    // * @param {number} id - the unique identifier to find the order in the database
+    // * @param {number} newValues - Values to update; takes a JSON Object; { status: 'delivering' }
+    // * @returns {Order} - a generated Order object stored in this.order
+    // */
+    // async updateOrder(id, newVals) {
+    //     const order = await this.loadOrder(id);
+    //     order.update(newVals);
+    // }
 
 }
 

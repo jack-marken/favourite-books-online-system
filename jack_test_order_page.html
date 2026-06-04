@@ -5,10 +5,12 @@
 <body>
     <p id="example-order-0"></p>
     <p id="example-order-1"></p>
+    <p id="example-order-2"></p>
     <p id="example-book"></p>
     <script type="module">
         import { BookController } from './js/classes/bookController.js';
         import { OrderController } from './js/classes/orderController.js';
+        import { OrderStatusOpts } from './js/classes/order.js';
 
         const orderController = new OrderController();
         const bookController = new BookController();
@@ -20,6 +22,8 @@
 
         currentOrder = await orderController.loadOrder("1");
         document.getElementById('example-order-1').innerText = currentOrder.toString();
+        currentOrder.update({ totalCost: 1000, status: OrderStatusOpts.DELIVERING })
+        document.getElementById('example-order-2').innerText = currentOrder.toString();
         
         currentBook = await bookController.loadBook("1");
         document.getElementById('example-book').innerText = currentBook.toString();
