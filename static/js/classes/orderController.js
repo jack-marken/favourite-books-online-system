@@ -3,6 +3,7 @@ import { Order, OrderStatusOpts } from './order.js';
 class OrderController {
     constructor() {
         this.statusOptions = OrderStatusOpts
+        this.dbPath = "/static/data/orders.json";
         this.order = null;
     }
 
@@ -22,13 +23,11 @@ class OrderController {
     * @returns {Order} - a generated Order object stored in this.order
     */
     async loadOrder(id) {
-        const dbPath = window.location.origin + "/data/orders.json";
         try {
-            const response = await fetch(dbPath);
+            const response = await fetch(this.dbPath);
             const data = await response.json();
             const order = data.values().find(o => o.id == id)
             this.order = new Order(order);
-            console.log(this.order)
             return this.order;
         } catch (error) {
             console.error("Error loading order details:", error)
@@ -41,10 +40,11 @@ class OrderController {
     // * @param {number} newValues - Values to update; takes a JSON Object; { status: 'delivering' }
     // * @returns {Order} - a generated Order object stored in this.order
     // */
-    // async updateOrder(id, newVals) {
-    //     const order = await this.loadOrder(id);
-    //     order.update(newVals);
-    // }
+    async updateOrder(id, newVals) {
+        const order = await this.loadOrder(id);
+        order.update(newVals);
+        return this.order
+    }
 
 }
 

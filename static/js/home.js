@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // grab books + filter into bestselles/preorder/featured
-    fetch("data/books.json")
+    fetch("static/data/books.json")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to load books data");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const query = document.getElementById("search-input").value.trim();
             if (query) {
                 // Relocate to the pages folder passing along the search string
-                window.location.href = `pages/search.html?query=${encodeURIComponent(query)}`;
+                window.location.href = `search?query=${encodeURIComponent(query)}`;
             }
         });
     }
@@ -60,7 +60,7 @@ function renderBooks(booksList, elementId) {
                             <span class="fw-bold text-danger">$${book.price.toFixed(2)}</span>
                             ${book.originalPrice ? `<span class="text-decoration-line-through text-muted small ms-2">$${book.originalPrice.toFixed(2)}</span>` : ""}
                         </p>
-                        <a href="pages/book.html?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
+                        <a href="book?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
                     </div>
                 </div>
             </div>
