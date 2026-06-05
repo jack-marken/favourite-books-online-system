@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lowerCaseQuery = searchQuery.toLowerCase();
 
     // grab books + filter + render
-    fetch("../data/books.json")
+    fetch("static/data/books.json")
         .then(response => response.json())
         .then(books => {
             const matchedBooks = books.filter(book => 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 bookCard.innerHTML = `
                     <div class="card h-100 shadow-sm">
-                        <img src="${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 250px; object-fit: contain;">
+                        <img src="static/${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 250px; object-fit: contain;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fs-6 text-truncate mb-1" title="${book.title}">${book.title}</h5>
                             <p class="card-text text-muted small mb-2">By ${book.author}</p>

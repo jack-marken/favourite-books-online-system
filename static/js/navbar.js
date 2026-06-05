@@ -85,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const query = document.getElementById('nav-search-input').value.trim();
         if (query) {
-        window.location.href = `${base}/pages/search.html?query=${encodeURIComponent(query)}`;
+        // window.location.href = `${base}/pages/search.html?query=${encodeURIComponent(query)}`;
+        window.location.href = `${base}/search?query=${encodeURIComponent(query)}`;
         }
     });
 
