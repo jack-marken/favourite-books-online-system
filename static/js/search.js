@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lowerCaseQuery = searchQuery.toLowerCase();
 
     // grab books + filter + render
-    fetch("../data/books.json")
+    fetch("static/data/books.json")
         .then(response => response.json())
         .then(books => {
             const matchedBooks = books.filter(book => 
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p class="card-text text-muted small mb-2">By ${book.author}</p>
                             <div class="mt-auto">
                                 <p class="fw-bold text-danger mb-2">$${book.price.toFixed(2)}</p>
-                                <a href="book.html?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
+                                <a href="book?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
                             </div>
                         </div>
                     </div>
