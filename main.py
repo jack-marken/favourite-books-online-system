@@ -13,6 +13,26 @@ def index():
     # return render_template('index.html', data=data, weather=weather, car_settings=car_settings)
     return render_template('index.html')
 
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+@app.route('/book')
+def book():
+    return render_template('book.html')
+
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+@app.route('/checkoutSuccess')
+def checkoutSuccess():
+    return render_template('checkoutSuccess.html')
+
 if __name__ == "__main__":
     app.run(debug=True, host='localhost', port=8080)
 app = Flask(__name__)
