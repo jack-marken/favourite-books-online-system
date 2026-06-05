@@ -1,10 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-# import requests
-# import time
-# from datetime import datetime
-# import serial
-# import threading
-# import pymysql
 
 app = Flask(__name__)
 

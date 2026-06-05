@@ -16,20 +16,20 @@
 
         const container = document.getElementById("container");
         const orderController = new OrderController();
-        // const bookController = new BookController();
+        const bookController = new BookController();
         var currentOrder = null;
-        // var currentBook = null;
+        var currentBook = null;
 
-        // await bookController.newBook({
-        //         title: "New Book",
-        //         author: "New Author",
-        //         price: 29.99,
-        //         originalPrice: 34.99,
-        //         cover: "",
-        //         genre: "Action",
-        //         description: "Description of the book.",
-        //         badge: "featured"
-        //     });
+        await bookController.newBook({
+                title: "New Book",
+                author: "New Author",
+                price: 29.99,
+                originalPrice: 34.99,
+                cover: "",
+                genre: "Action",
+                description: "Description of the book.",
+                badge: "featured"
+            });
 
         currentOrder = await orderController.loadOrder("0");
         container.insertAdjacentHTML("beforeend", `${currentOrder.toHTML()}`);
@@ -39,8 +39,8 @@
         currentOrder.update({ totalCost: 1000, status: OrderStatusOpts.DELIVERING })
         container.insertAdjacentHTML("beforeend", `${currentOrder.toHTML()}`);
         
-        // currentBook = await bookController.loadBook("1");
-        // container.insertAdjacentHTML("beforeend", `${currentBook.toHTML()}`);
+        currentBook = await bookController.loadBook("1");
+        container.insertAdjacentHTML("beforeend", `${currentBook.toHTML()}`);
     </script>
 </body>
 </html>
