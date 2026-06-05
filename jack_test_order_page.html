@@ -1,32 +1,46 @@
 <html>
     <head>
     <title>Test order page</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <p id="example-order-0"></p>
-    <p id="example-order-1"></p>
-    <p id="example-order-2"></p>
-    <p id="example-book"></p>
+    <div id="container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script type="module">
         import { BookController } from './js/classes/bookController.js';
         import { OrderController } from './js/classes/orderController.js';
         import { OrderStatusOpts } from './js/classes/order.js';
 
+        const container = document.getElementById("container");
         const orderController = new OrderController();
         const bookController = new BookController();
         var currentOrder = null;
         var currentBook = null;
 
+        await bookController.newBook({
+                title: "New Book",
+                author: "New Author",
+                price: 29.99,
+                originalPrice: 34.99,
+                cover: "",
+                genre: "Action",
+                description: "Description of the book.",
+                badge: "featured"
+            });
+
         currentOrder = await orderController.loadOrder("0");
-        document.getElementById('example-order-0').innerText = currentOrder.toString();
+        container.insertAdjacentHTML("beforeend", `${currentOrder.toHTML()}`);
 
         currentOrder = await orderController.loadOrder("1");
-        document.getElementById('example-order-1').innerText = currentOrder.toString();
+        container.insertAdjacentHTML("beforeend", `${currentOrder.toHTML()}`);
         currentOrder.update({ totalCost: 1000, status: OrderStatusOpts.DELIVERING })
-        document.getElementById('example-order-2').innerText = currentOrder.toString();
+        container.insertAdjacentHTML("beforeend", `${currentOrder.toHTML()}`);
         
         currentBook = await bookController.loadBook("1");
-        document.getElementById('example-book').innerText = currentBook.toString();
+        container.insertAdjacentHTML("beforeend", `${currentBook.toHTML()}`);
     </script>
 </body>
 </html>

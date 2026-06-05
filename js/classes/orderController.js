@@ -28,7 +28,6 @@ class OrderController {
             const data = await response.json();
             const order = data.values().find(o => o.id == id)
             this.order = new Order(order);
-            console.log(this.order)
             return this.order;
         } catch (error) {
             console.error("Error loading order details:", error)
@@ -41,10 +40,11 @@ class OrderController {
     // * @param {number} newValues - Values to update; takes a JSON Object; { status: 'delivering' }
     // * @returns {Order} - a generated Order object stored in this.order
     // */
-    // async updateOrder(id, newVals) {
-    //     const order = await this.loadOrder(id);
-    //     order.update(newVals);
-    // }
+    async updateOrder(id, newVals) {
+        const order = await this.loadOrder(id);
+        order.update(newVals);
+        return this.order
+    }
 
 }
 

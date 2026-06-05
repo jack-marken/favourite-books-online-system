@@ -27,16 +27,17 @@ class Order {
         })
     }
 
-    toString() {
-        const outputString = `===
-        Order
-        ---
-        id: ${this.id}
-        books: ${JSON.stringify(this.books)}
-        total cost: ${this.totalCost}
-        status: ${this.status}`;
+    toHTML() {
+        const outputHTML = `<p>===<br>
+        Order<br>
+        ---<br>
+        id: ${this.id}<br>
+        books: ${JSON.stringify(this.books)}<br>
+        total cost: ${this.totalCost}<br>
+        status: ${this.status}<br>
+        </p>`;
 
-        return outputString;
+        return outputHTML;
     }
 }
 
