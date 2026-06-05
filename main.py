@@ -8,6 +8,10 @@ from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
+@app.route('/test-orders')
+def testOrders():
+    return render_template('jack_test_order_page.html')
+
 @app.route('/')
 def index():
     # return render_template('index.html', data=data, weather=weather, car_settings=car_settings)
@@ -32,6 +36,18 @@ def checkout():
 @app.route('/checkoutSuccess')
 def checkoutSuccess():
     return render_template('checkoutSuccess.html')
+
+@app.route('/account')
+def account():
+    return render_template('account/account.html')
+
+@app.route('/account/login')
+def accountLogin():
+    return render_template('account/login.html')
+
+@app.route('/account/register')
+def accountRegister():
+    return render_template('account/register.html')
 
 if __name__ == "__main__":
     app.run(debug=True, host='localhost', port=8080)

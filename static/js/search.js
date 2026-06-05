@@ -44,13 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 bookCard.innerHTML = `
                     <div class="card h-100 shadow-sm">
-                        <img src="static/${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 250px; object-fit: contain;">
+                        <img src="${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 250px; object-fit: contain;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fs-6 text-truncate mb-1" title="${book.title}">${book.title}</h5>
                             <p class="card-text text-muted small mb-2">By ${book.author}</p>
                             <div class="mt-auto">
                                 <p class="fw-bold text-danger mb-2">$${book.price.toFixed(2)}</p>
-                                <a href="book.html?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
+                                <a href="book?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
                             </div>
                         </div>
                     </div>

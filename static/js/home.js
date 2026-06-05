@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const query = document.getElementById("search-input").value.trim();
             if (query) {
                 // Relocate to the pages folder passing along the search string
-                window.location.href = `pages/search.html?query=${encodeURIComponent(query)}`;
+                window.location.href = `search?query=${encodeURIComponent(query)}`;
             }
         });
     }
@@ -51,7 +51,7 @@ function renderBooks(booksList, elementId) {
 
         bookCard.innerHTML = `
             <div class="card h-100 shadow-sm">
-                <img src="static/${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 300px; object-fit: contain;">
+                <img src="${book.cover}" class="card-img-top p-3" alt="${book.title}" style="height: 300px; object-fit: contain;">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fs-6 text-truncate mb-1" title="${book.title}">${book.title}</h5>
                     <p class="card-text text-muted small mb-2">By ${book.author}</p>
@@ -60,7 +60,7 @@ function renderBooks(booksList, elementId) {
                             <span class="fw-bold text-danger">$${book.price.toFixed(2)}</span>
                             ${book.originalPrice ? `<span class="text-decoration-line-through text-muted small ms-2">$${book.originalPrice.toFixed(2)}</span>` : ""}
                         </p>
-                        <a href="pages/book.html?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
+                        <a href="book?id=${book.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
                     </div>
                 </div>
             </div>

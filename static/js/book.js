@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const bookId = urlParams.get('id');
 
+    console.log(bookId);
 
     let currentBook = null;
 
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // grab books + match w/id + load details into page
-    fetch("../data/books.json")
+    fetch("static/data/books.json")
         .then(response => response.json())
         .then(books => {
             

@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Account</a>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="${base}/pages/account/login.html">Login</a></li>
-            <li><a class="dropdown-item" href="${base}/pages/account/register.html">Register</a></li>
+            <li><a class="dropdown-item" href="${base}/account/login">Login</a></li>
+            <li><a class="dropdown-item" href="${base}/account/register">Register</a></li>
         </ul>
         </li>
     `
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li class="nav-item d-none d-lg-block">
                 ${makeCartButton("me-2")}
                 </li>
-                <li class="nav-item"><a class="nav-link" href="${base}/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="${base}">Home</a></li>
                 ${accountLinks}
             </ul>
             </div>

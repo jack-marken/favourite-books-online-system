@@ -3,7 +3,7 @@ import { Book } from "./book.js"
 class BookController {
     constructor() {
         this.book = null;
-        this.dbPath = window.location.origin + "/data/books.json";
+        this.dbPath = "/static/data/books.json";
     }
 
     async newBook({ title, author, price, originalPrice, cover, genre, description, badge, stock }) {
