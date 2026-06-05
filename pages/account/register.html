@@ -14,6 +14,43 @@
         <div class="container my-5">
         <h1>Register</h1>
         <a href="../account/login.html">Already have an account? Login</a>
+
+        <div class="row justify-content-center mt-4">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div id="registerAlert" class="alert d-none" role="alert"></div>
+            <form id="registerForm" class="card p-4 shadow-sm" novalidate>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required minlength="6">
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" required minlength="6">
+              </div>
+              <div class="d-grid">
+                <button class="btn btn-primary" type="submit">Register</button>
+              </div>
+            </form>
+          </div>
+        </div>
         </div>
         
   <footer class="bg-dark text-white text-center py-3 mt-5">
@@ -24,5 +61,6 @@
   <!-- <script src="../js/navbar.js" data-depth="pages"></script> -->
 
   <script src="../../js/navbar.js" data-depth="nested"></script>
+  <script src="../../js/register.js"></script>
 </body>
 </html>
