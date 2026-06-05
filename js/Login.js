@@ -1,0 +1,52 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('loginForm');
+    const alertBox = document.getElementById('loginAlert');
+
+    function showAlert(message, type = 'danger') {
+        alertBox.className = `alert alert-${type}`;
+        alertBox.textContent = message;
+        alertBox.classList.remove('d-none');
+    }
+
+    function hideAlert() {
+        alertBox.className = 'alert d-none';
+        alertBox.textContent = '';
+    }
+
+    async function ensureUsers() {
+        const stored = localStorage.getItem('users');
+        if (stored) return JSON.parse(stored);
+        try {
+            const res = await fetch('../../data/users.json');
+            if (!res.ok) return [];
+            const data = await res.json();
+            localStorage.setItem('users', JSON.stringify(data));
+            return data;
+        } catch (e) {
+            return [];
+        }
+    }
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        hideAlert();
+
+        const email = (document.getElementById('email').value || '').trim().toLowerCase();
+        const password = (document.getElementById('password').value || '');
+
+        if (!email || !password) {
+            showAlert('Please enter email and password.');
+            return;
+        }
+
+        const users = await ensureUsers();
+        const user = users.find(function(u){ return (u.email || '').toLowerCase() === email && (u.password || '') === password; });
+        if (!user) {
+            showAlert('Invalid email or password.');
+            return;
+        }
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        window.location.href = 'account.html';
+    });
+});
