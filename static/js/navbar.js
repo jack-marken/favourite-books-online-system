@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // cart button w/ num   
     const makeCartButton = (extraClasses = "") => `
-        <a href="${base}/pages/cart.html" class="btn btn-primary position-relative nav-cart-btn ${extraClasses}">
+        <a href="${base}/cart" class="btn btn-primary position-relative nav-cart-btn ${extraClasses}">
         <i class="bi bi-cart"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger nav-cart-count">0</span>
         </a>
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = `
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="${base}/index.html">Favourite Books</a>
+            <a class="navbar-brand" href="${base}">Favourite Books</a>
 
             <div class="d-flex align-items-center d-lg-none gap-2 order-lg-2">
             ${makeCartButton("me-1")}

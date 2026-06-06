@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //grab search from url
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('query');
-
     const queryTextSpan = document.getElementById('search-query-text');
     const resultsRow = document.getElementById('search-results-row');
 
@@ -23,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(books => {
             const matchedBooks = books.filter(book => 
                 book.title.toLowerCase().includes(lowerCaseQuery) || 
-                book.author.toLowerCase().includes(lowerCaseQuery)
+                book.author.toLowerCase().includes(lowerCaseQuery) ||
+                book.genre.toLowerCase().includes(lowerCaseQuery)
             );
 
             resultsRow.innerHTML = "";
