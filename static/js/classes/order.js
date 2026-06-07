@@ -18,6 +18,44 @@ class Order {
         this.status = data.status;
     }
 
+    async updateStatus(newStatus) {
+        this.status = newStatus;
+        const url = `api/update-order-status/${this.id}/${this.status}`
+        // const url = `api/update-order-status/`
+        // const payload = {
+        //     id: this.id,
+        //     status: this.status
+        // }
+
+        try {
+            const response = await fetch(url)
+            // const response = await fetch(url, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(payload)
+                // body: JSON.stringify({
+                //     "id": this.id,
+                //     "books": this.books,
+                //     "totalCost": this.totalCost,
+                //     "purchaseDate": this.purchaseDate,
+                //     "customerName": this.customerName,
+                //     "customerPaymentDetails": this.customerPaymentDetails,
+                //     "status": this.status
+                // })
+            // });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log('Success:', result);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     /**
     * Updates the Order's values, and reflects this update in the database
     * @param {number} newValues - Values to update; takes a JSON Object; { status: OrderStatusOpts.PURCHASED }
@@ -35,34 +73,6 @@ class Order {
 
         // /update-dataset/<dataset>/<newValues>/
         // TODO: Use this route to update the json dataset
-        url = "/update-dataset/order/" + this.status
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "id": this.id,
-                    "books": this.books,
-                    "totalCost": this.totalCost,
-                    "purchaseDate": this.purchaseDate,
-                    "CustomerName": this.customerName,
-                    "CustomerPaymentDetails": this.customerPaymentDetails,
-                    "status": this.status
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            console.log('Success:', result);
-        } catch (error) {
-            console.error('Error:', error);
-        }
     }
 
     toHTML() {
