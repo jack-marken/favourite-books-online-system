@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem('cart', JSON.stringify(cart));
 
             alert(`"${currentBook.title}" has been added to your cart!`);
+            location.reload();
         });
     }
 });
