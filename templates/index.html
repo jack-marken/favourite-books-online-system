@@ -33,13 +33,22 @@
                 <button type="submit" class="btn btn-primary px-4">Search</button>
             </form>
         </div>
+
+        <div class="container text-center my-4 py-3">
+            <span class="text-muted me-2">Popular genres:</span>
+                <a href="search?query=fiction" class="btn btn-sm btn-outline-secondary">Fiction</a>
+                <a href="search?query=fantasy" class="btn btn-sm btn-outline-secondary">Fantasy</a>
+                <a href="search?query=science fiction" class="btn btn-sm btn-outline-secondary">Sci-Fi</a>
+                <a href="search?query=classic" class="btn btn-sm btn-outline-secondary">Classic</a>
+        </div>
     </section>
 
 
-    <div class="container my-5">
+
+    <!-- <div class="container my-5">
         <h1>placeholder:</h1>
         <a href="{{ url_for('search') }}"> link to search page</a>
-    </div>
+    </div> -->
 
 
     <!-- Bestsellers -->
@@ -74,3 +83,12 @@
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 </html>
+
+
+<style>
+.hero {
+    text-align: center;
+    padding: 100px 100px;
+    border-bottom: 1px solid #e9ecef;
+}
+</style>

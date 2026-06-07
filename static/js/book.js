@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('book-cover').alt = currentBook.title;
                 document.getElementById('book-stock').innerText = `${currentBook.stock} copies available`;
 
-                // Handle Badge (like "bestseller" or "preorder")
-                const badgeEl = document.getElementById('book-badge');
+                // Handle Badge here (like bestseller/preorder)
+                const  badge = document.getElementById('book-badge');
                 if (currentBook.badge && currentBook.badge !== "none") {
-                    badgeEl.innerText = currentBook.badge.toUpperCase();
-                    badgeEl.classList.remove('d-none');
+                    badge.innerText = currentBook.badge.toUpperCase();
+                    badge.classList.remove('d-none');
                 }
             } else {
                 document.getElementById('book-title').innerText = "Book not found";
@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Error loading book details:", error));
 
-    // add to cart here
+    // add to cart here tmp for Travis
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', () => {
             if (!currentBook) return;
 
-            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             // push book to cart array
             cart.push({
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             //using local storage
-            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(cart));
 
             alert(`"${currentBook.title}" has been added to your cart!`);
         });

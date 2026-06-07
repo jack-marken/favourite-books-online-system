@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(books => {
             const bestsellers = books.filter(book => book.badge === "bestseller");
             const preorders = books.filter(book => book.badge === "preorder");
-            const featuredAuthorBooks = books.filter(book => book.author === "Suzanne Collins");
+            const  featured = books.filter(book => book.author === "Suzanne Collins");
 
             renderBooks(bestsellers, "bestsellers-row");
             renderBooks(preorders, "preorders-row");
-            renderBooks(featuredAuthorBooks, "featured-row");
+            renderBooks( featured, "featured-row");
         })
-        .catch(error => console.error("Error population homepage rows:", error));
+        
 
     // search here
     const searchForm = document.getElementById("search-form");
@@ -39,6 +39,7 @@ function renderBooks(booksList, elementId) {
 
     container.innerHTML = "";
 
+    //catch for no books
     if (booksList.length === 0) {
         container.innerHTML = `<div class="col-12"><p class="text-muted">No books found in this category.</p></div>`;
         return;
