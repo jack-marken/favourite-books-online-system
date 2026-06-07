@@ -1,28 +1,148 @@
-<!-- <script src="../../js/navbar.js" data-depth="nested"></script> -->
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Favourite Books</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    </head>
-    <body>
-        
-        <div id="navbar-placeholder"></div>
-        
-        <div class="container my-5">
-        <h1>Order Management</h1>
-        </div>
-        
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    <p class="mb-0">© 2026 Favourite Books | All Rights Reserved</p>
-  </footer>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Favourite Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+<div class="container my-5">
+  <h1>Order Management</h1>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- <script src="../js/navbar.js" data-depth="pages"></script> -->
+  <table class="table mt-5">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody id="orders-table-body"></tbody>
+  </table>
+</div>
 
-  <script src="../../js/navbar.js" data-depth="nested"></script>
+<!-- Modal (popup) for confirming status change -->
+<!-- Modal popup -->
+<div class="modal" id="confirmationModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pick order for delivery</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody id="books-in-order"></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <form>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="confirm-picked-order">
+            <label class="form-check-label" for="checkDefault">
+              All books in this order are put aside and are ready for delivery pickup.
+            </label>
+          </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submit-picked-order" disabled>Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <p class="mb-0">© 2026 Favourite Books | All Rights Reserved</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/navbar.js') }}" data-depth="nested"></script>
+
+<script type="module">
+import { OrderController } from '/static/js/classes/orderController.js'
+import { BookController } from '/static/js/classes/bookController.js'
+
+const orderController = new OrderController();
+const bookController = new BookController();
+const allOrders = await orderController.loadAllOrders()
+
+const ordersTable = document.getElementById("orders-table-body");
+
+const orderStatusLabels = {
+  0: "Ordered",
+  1: "Ready for Delivery",
+  2: "Delivering",
+  3: "Refund Requesteed",
+  4: "Refunded"
+}
+
+allOrders.forEach(order => {
+  var orderStatusLabel = 'Purchased';
+  Object.entries(orderStatusLabels).forEach(([key, value]) => {
+    if (order.status == key) {
+      orderStatusLabel = value;
+    }
+  });
+  ordersTable.insertAdjacentHTML("beforeend", `
+  <th scope="row">${order.id}</th>
+    <td>${order.purchaseDate}</td>
+    <td>${order.customerName}</td>
+    <td class="dropdown">
+      <button value="${order.id}" class="btn btn-link toggle-modal-button" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+        ${orderStatusLabel}
+      </button>
+    </td>
+  `);
+})
+
+const toggleModalButtons = document.querySelectorAll('.toggle-modal-button');
+const booksTable = document.getElementById("books-in-order"); // Table within the modal popup
+
+toggleModalButtons.forEach(async button => {
+  button.addEventListener('click', async (event) => {
+    const orderId = button.value;
+    const order = await orderController.loadOrder(button.value);
+
+    Object.values(order.books).forEach(async bookData => {
+      const book = await bookController.loadBook(bookData.id);
+      const quantity = bookData.quantity;
+      booksTable.insertAdjacentHTML("beforeend", `
+      <th scope="row">${book.title}</th>
+      <td>${book.author}</td>
+      <td>${book.price}</td>
+      <td>${quantity}</td>
+      `)
+    })
+
+    const confirmationModal = document.getElementById('confirmationModal');
+    confirmationModal.addEventListener('hide.bs.modal', function (event) {
+      booksTable.replaceChildren(); // Clear all child elements <th> and <td>
+      console.log("CLOSING");
+    });
+  });
+});
+
+const confirmationCheckbox = document.getElementById("confirm-picked-order")
+confirmationCheckbox.addEventListener("change", () => {
+  if (confirmationCheckbox.checked) {
+    document.getElementById("submit-picked-order").disabled = false;
+  }
+  else {
+    document.getElementById("submit-picked-order").disabled = true;
+  }
+});
+</script>
 </body>
 </html>

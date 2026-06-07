@@ -57,6 +57,25 @@ class BookController {
             console.error("Error loading book details:", error)
         }
     }
+
+    // async loadAllBooks() {
+    //     const bookController = new BookController();
+    //     var orders = [];
+    //     try {
+    //         const response = await fetch(this.dbPath);
+    //         const data = await response.json();
+    //         data.values().forEach(book => {
+    //             const books = []
+    //             book.forEach(([id, quantity]) => {
+    //                 const bookData = await bookController.loadBook(id);
+    //                 books.push({ "data": bookData, "quantity": quantity })
+    //             })
+    //         })
+    //         return books;
+    //     } catch (error) {
+    //         console.error("Error loading book details:", error)
+    //     }
+    // }
 }
 
 export { BookController }

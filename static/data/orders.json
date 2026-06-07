@@ -13,22 +13,28 @@
             }
         ],
         "totalCost": 58.98,
-        "status": 1
+        "purchaseDate": "2026-01-01",
+        "customerName": "John Doe",
+        "customerPaymentDetails": "",
+        "status": 0
     },
     {
         "id": 1,
         "books":
         [
             {
-                "id": "1",
+                "id": "4",
                 "quantity": 1
             },
             {
-                "id": "2",
+                "id": "8",
                 "quantity": 2
             }
         ],
         "totalCost": 58.98,
-        "status": 1
+        "purchaseDate": "2026-01-02",
+        "customerName": "Jane Doe",
+        "customerPaymentDetails": "",
+        "status": 0
     }
 ]
