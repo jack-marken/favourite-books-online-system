@@ -1,7 +1,10 @@
-from flask import Flask, render_template, jsonify, request
+import os
+import json
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 
 app = Flask(__name__)
 
+# === Website Views ===
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -38,81 +41,52 @@ def accountLogin():
 def accountRegister():
     return render_template('account/register.html')
 
+@app.route('/staff')
+def staff():
+    return redirect(url_for('staffOrders'))
+
+@app.route('/staff/orders')
+def staffOrders():
+    return render_template('staff/orders.html')
+
+@app.route('/staff/catalogue')
+def staffCatalogue():
+    return render_template('staff/orders.html')
+
 @app.route('/test-orders')
 def testOrders():
     return render_template('jack_test_order_page.html')
 
+# === Methods for editing JSON datasets ===
+@app.route('/update-dataset/<dataset>/<newValues>', methods=['POST'])
+def updateDataset(dataset, newValues):
+    dataset_file_path = f'/static/data/{dataset}.json'
+    app.logger.debug(dataset_file_path);
+
+    # 1. Get the new data sent in the request body
+    new_data = request.get_json()
+    if not new_data:
+        return jsonify({"error": "No JSON data provided"}), 400
+
+    # 2. Check if the file exists, otherwise start with an empty dict
+    if os.path.exists(dataset_file_path):
+        with open(dataset_file_path, 'r', encoding='utf-8') as file:
+            try:
+                current_data = json.load(file)
+            except json.JSONDecodeError:
+                current_data = {}
+    else:
+        current_data = {}
+
+    # 3. Update the existing data with the incoming values
+    current_data.update(new_data)
+
+    # 4. Write the modified data back to the file safely
+    with open(dataset_file_path, 'w', encoding='utf-8') as file:
+        json.dump(current_data, file, indent=4)
+
+    return jsonify({"message": "File updated successfully", "updated_data": current_data}), 200
+
 if __name__ == "__main__":
     app.run(debug=True, host='localhost', port=8080)
 app = Flask(__name__)
-
-
-# return render_template('index.html', data=data, weather=weather, car_settings=car_settings)
-
-# @app.route('/update/database', methods=['POST'])
-# def updateDatabase():
-#     try:
-#         dbconn = pymysql.connect(host="localhost", user="pi", password="", database="car_db")
-#         print("Connected to database.")
-
-#         # Example serial data: "light_sensor,3;potentiometer,0;headlights,0;"
-#         sensor_data = latest_serial_data.split(';')
-#         for item in sensor_data:
-#             if len(item.split(',')) == 2:
-#                 sensor, val = item.split(',')
-#                 cursor = dbconn.cursor()
-#                 cursor.execute("INSERT INTO sensor_records (sensor_type, sensor_value) VALUES (%s, %s)", (sensor, val))
-#                 dbconn.commit()
-#                 cursor.close()
-#     except pymysql.MySQLError as e:
-#         print(f"Database error: {e}")
-#     finally:
-#         if dbconn:
-#             dbconn.close()
-#     return jsonify({'result': 'successful'})
-
-# @app.route('/update/car-settings', methods=['POST'])
-# def updateCarSettings():
-#     car_settings = request.get_json() # retrieve the data sent from JavaScript
-
-#     ser.write(f"aircon:{car_settings['aircon']}\n".encode('utf-8'))
-#     time.sleep(0.1)
-#     ser.write(f"headlights:{car_settings['headlights']}\n".encode('utf-8'))
-
-#     return jsonify({'result': car_settings}) # return the result to JavaScript
-
-
-# # === Template data to be replaced at run-time ===
-# data = (
-#     ("1", "potentiometer", "300"),
-#     ("2", "light_sensor", "250"),
-#     ("3", "potentiometer", "540"),
-#     ("4", "headlights", "ON"),
-# )
-
-# weather = {
-#     "current_temp" : "21.1",
-#     "time" : datetime.fromisoformat("2026-05-25T22:30:00")
-# }
-
-# car_settings = {
-#     "headlights" : "manual",
-#     "aircon" : "manual"
-# }
-
-# @app.route('/get-database-records')
-# def getDatabaseRecords():
-#     try:
-#         dbconn = pymysql.connect(host="localhost", user="pi", password="", database="car_db")
-
-#         cursor = dbconn.cursor()
-#         result = cursor.execute("SELECT * FROM sensor_records")
-#         dbconn.commit()
-#         cursor.close()
-#     except pymysql.MySQLError as e:
-#         print(f"Database error: {e}")
-#     finally:
-#         if dbconn:
-#             dbconn.close()
-#     return jsonify({'result': result})
-

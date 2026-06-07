@@ -1,4 +1,5 @@
 import { Order, OrderStatusOpts } from './order.js';
+import { BookController } from './bookController.js';
 
 class OrderController {
     constructor() {
@@ -8,13 +9,7 @@ class OrderController {
     }
 
     newOrder(data) {
-        console.log("TESTING");
-        // newOrderData = {
-        //     this.id = data.id;
-        //     this.books = data.books
-        //     this.totalCost = data.totalCost;
-        //     this.status = data.status;
-        // }
+        // TODO
     }
 
     /**
@@ -29,6 +24,22 @@ class OrderController {
             const order = data.values().find(o => o.id == id)
             this.order = new Order(order);
             return this.order;
+        } catch (error) {
+            console.error("Error loading order details:", error)
+        }
+    }
+
+    async loadAllOrders() {
+        const bookController = new BookController();
+        var orders = [];
+        try {
+            const response = await fetch(this.dbPath);
+            const data = await response.json();
+            // const order = data.values().find(o => o.id == id)
+            data.values().forEach(order => {
+                orders.push(order);
+            })
+            return orders;
         } catch (error) {
             console.error("Error loading order details:", error)
         }
