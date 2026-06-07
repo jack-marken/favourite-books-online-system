@@ -1,6 +1,6 @@
 // Enumerator of order status options
 const OrderStatusOpts = Object.freeze({
-    PURCHASED: 0,
+    ORDERED: 0,
     READY_FOR_DELIVERY: 1,
     DELIVERING: 2,
     REFUND_REQUESTED: 3,
@@ -12,6 +12,9 @@ class Order {
         this.id = data.id;
         this.books = data.books
         this.totalCost = data.totalCost;
+        this.purchaseDate = data.purchaseDate,
+        this.customerName = data.customerName,
+        this.customerPaymentDetails = data.customerPaymentDetails,
         this.status = data.status;
     }
 
@@ -44,6 +47,9 @@ class Order {
                     "id": this.id,
                     "books": this.books,
                     "totalCost": this.totalCost,
+                    "purchaseDate": this.purchaseDate,
+                    "CustomerName": this.customerName,
+                    "CustomerPaymentDetails": this.customerPaymentDetails,
                     "status": this.status
                 })
             });

@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -40,6 +40,18 @@ def accountLogin():
 @app.route('/account/register')
 def accountRegister():
     return render_template('account/register.html')
+
+@app.route('/staff')
+def staff():
+    return redirect(url_for('staffOrders'))
+
+@app.route('/staff/orders')
+def staffOrders():
+    return render_template('staff/orders.html')
+
+@app.route('/staff/catalogue')
+def staffCatalogue():
+    return render_template('staff/orders.html')
 
 @app.route('/test-orders')
 def testOrders():
