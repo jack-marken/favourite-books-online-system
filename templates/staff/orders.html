@@ -109,11 +109,13 @@ allOrders.forEach(order => {
 
 const toggleModalButtons = document.querySelectorAll('.toggle-modal-button');
 const booksTable = document.getElementById("books-in-order"); // Table within the modal popup
+const confirmationModal = document.getElementById('confirmationModal');
+const confirmationCheckbox = document.getElementById("confirm-picked-order")
 
 toggleModalButtons.forEach(async button => {
   button.addEventListener('click', async (event) => {
     const orderId = button.value;
-    const order = await orderController.loadOrder(button.value);
+    const order = await orderController.loadOrder(orderId);
 
     Object.values(order.books).forEach(async bookData => {
       const book = await bookController.loadBook(bookData.id);
@@ -126,23 +128,29 @@ toggleModalButtons.forEach(async button => {
       `)
     })
 
-    const confirmationModal = document.getElementById('confirmationModal');
+    // When modal is closed
     confirmationModal.addEventListener('hide.bs.modal', function (event) {
       booksTable.replaceChildren(); // Clear all child elements <th> and <td>
-      console.log("CLOSING");
+      confirmationCheckbox.checked = false;
     });
   });
 });
 
-const confirmationCheckbox = document.getElementById("confirm-picked-order")
+const submitPickedOrderButton = document.getElementById('submit-picked-order');
 confirmationCheckbox.addEventListener("change", () => {
   if (confirmationCheckbox.checked) {
-    document.getElementById("submit-picked-order").disabled = false;
+    submitPickedOrderButton.disabled = false;
   }
   else {
-    document.getElementById("submit-picked-order").disabled = true;
+    submitPickedOrderButton.disabled = true;
   }
 });
+
+submitPickedOrderButton.addEventListener('click', () => {
+  alert("Sent for delivery pick-up");
+  const modalInstance = bootstrap.Modal.getOrCreateInstance(confirmationModal);
+  modalInstance.hide();
+})
 </script>
 </body>
 </html>
