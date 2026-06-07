@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = `
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="${base}/index.html">Favourite Books</a>
+            <a class="navbar-brand" href="${base}">Favourite Books</a>
 
             <div class="d-flex align-items-center d-lg-none gap-2 order-lg-2">
             ${makeCartButton("me-1")}
