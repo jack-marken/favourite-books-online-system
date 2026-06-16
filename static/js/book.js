@@ -49,13 +49,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+            var inCart = false;
+            for (i = 0; i < cart.length; i++) {
+                if (currentBook.id == cart[i].id) {
+                    inCart = true
+                    cart[i].quantity += 1
+                }
+            }
             // push book to cart array
-            cart.push({
-                id: currentBook.id,
-                title: currentBook.title,
-                price: currentBook.price,
-                cover: currentBook.cover
-            });
+            if (!inCart) {
+                cart.push({
+                    id: currentBook.id,
+                    title: currentBook.title,
+                    price: currentBook.price,
+                    cover: currentBook.cover,
+                    quantity: 1
+                });
+            }
 
             //using local storage
             localStorage.setItem('cart', JSON.stringify(cart));
